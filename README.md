@@ -286,7 +286,7 @@ touch .env
 npm start
 ```
 
-**Backend runs on**: `http://localhost:5000`
+**Backend runs on**: `http://localhost:4000`
 
 #### 3. Frontend Setup
 
@@ -324,7 +324,7 @@ After starting all three services, verify they're running:
 
 | Service | URL | Status Check |
 |---------|-----|--------------|
-| Backend | http://localhost:5000 | Visit `/api/health` |
+| Backend | http://localhost:4000 | Visit `/api/health` |
 | Frontend | http://localhost:3000 | Open in browser |
 | Admin | http://localhost:5173 | Open in browser |
 
@@ -338,7 +338,7 @@ Create a `.env` file in the `backend/` directory:
 
 ```env
 # Server Configuration
-PORT=5000
+PORT=4000
 NODE_ENV=development
 
 # Database Configuration
@@ -364,7 +364,7 @@ ADMIN_URL=http://localhost:5173
 Create a `.env` file in the `frontend/` directory:
 
 ```env
-REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_URL=http://localhost:4000/api
 REACT_APP_ENVIRONMENT=development
 ```
 
@@ -373,7 +373,7 @@ REACT_APP_ENVIRONMENT=development
 Create a `.env` file in the `admin/` directory:
 
 ```env
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:4000/api
 VITE_ENVIRONMENT=development
 ```
 
@@ -414,7 +414,7 @@ mongod
 ### Base URL
 
 ```
-http://localhost:5000/api
+http://localhost:4000/api
 ```
 
 ### Authentication Endpoints
@@ -605,7 +605,7 @@ Error: connect ECONNREFUSED 127.0.0.1:27017
 
 #### Port Already in Use
 ```bash
-Error: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::4000
 ```
 **Solution**: Change port in `.env` or kill process using the port
 
