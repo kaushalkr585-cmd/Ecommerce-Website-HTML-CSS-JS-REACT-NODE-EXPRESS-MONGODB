@@ -670,11 +670,7 @@ We welcome contributions from the community! Please follow these guidelines:
 For support, please:
 - Open an issue on GitHub: [Issues](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/issues)
 - Contact: kaushalkr585@gmail.com
-- Check the [Wiki](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/wiki) for detailed guides
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
