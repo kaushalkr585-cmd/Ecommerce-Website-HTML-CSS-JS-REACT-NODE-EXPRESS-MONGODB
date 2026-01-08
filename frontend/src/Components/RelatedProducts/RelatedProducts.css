@@ -1,0 +1,137 @@
+.relatedproducts {
+  width: 100%;
+  min-height: 95vh;
+  padding: 90px 0 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(180deg, #ffffff, #f9f9ff);
+}
+
+.relatedproducts h1 {
+  font-size: 54px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.5px;
+}
+
+.relatedproducts hr {
+  width: 220px;
+  height: 6px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(90deg, #ff4141, #ff7a18);
+  box-shadow: 0 6px 18px rgba(255, 65, 65, 0.45);
+}
+
+.relatedproducts-item {
+  margin-top: 70px;
+  display: flex;
+  gap: 45px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .relatedproducts {
+    padding: 70px 0 100px;
+  }
+
+  .relatedproducts h1 {
+    font-size: 48px;
+  }
+
+  .relatedproducts hr {
+    width: 200px;
+    height: 5px;
+  }
+
+  .relatedproducts-item {
+    margin-top: 60px;
+    gap: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .relatedproducts {
+    padding: 60px 0 80px;
+    min-height: auto;
+  }
+
+  .relatedproducts h1 {
+    font-size: 42px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .relatedproducts hr {
+    width: 180px;
+    height: 5px;
+  }
+
+  .relatedproducts-item {
+    margin-top: 50px;
+    gap: 30px;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 569.60px) {
+  .relatedproducts {
+    padding: 50px 0 70px;
+  }
+
+  .relatedproducts h1 {
+    font-size: 36px;
+  }
+
+  .relatedproducts hr {
+    width: 150px;
+    height: 4px;
+  }
+
+  .relatedproducts-item {
+    margin-top: 40px;
+    gap: 25px;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .relatedproducts {
+    padding: 40px 0 60px;
+  }
+
+  .relatedproducts h1 {
+    font-size: 32px;
+  }
+
+  .relatedproducts hr {
+    width: 130px;
+  }
+
+  .relatedproducts-item {
+    margin-top: 35px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .relatedproducts {
+    padding: 35px 0 50px;
+  }
+
+  .relatedproducts h1 {
+    font-size: 28px;
+  }
+
+  .relatedproducts hr {
+    width: 120px;
+  }
+
+  .relatedproducts-item {
+    margin-top: 30px;
+    gap: 18px;
+  }
+}

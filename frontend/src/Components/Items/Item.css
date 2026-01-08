@@ -1,0 +1,172 @@
+.item {
+  width: 280px;
+  padding: 22px;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.item img {
+  width: 100%;
+  border-radius: 18px;
+}
+
+.item p {
+  margin: 14px 0 10px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #222;
+}
+
+.item-prices {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.item-prices-new {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ff4141;
+}
+
+.item-price-old {
+  font-size: 16px;
+  font-weight: 500;
+  color: #9a9a9a;
+  text-decoration: line-through;
+}
+
+.item:hover {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 1024px) {
+  .item {
+    width: 240px;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .item img {
+    border-radius: 16px;
+  }
+
+  .item p {
+    margin: 12px 0 8px;
+    font-size: 16px;
+  }
+
+  .item-prices {
+    gap: 16px;
+  }
+
+  .item-prices-new {
+    font-size: 18px;
+  }
+
+  .item-price-old {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .item {
+    width: 200px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .item img {
+    border-radius: 14px;
+  }
+
+  .item p {
+    margin: 10px 0 8px;
+    font-size: 15px;
+  }
+
+  .item-prices {
+    gap: 14px;
+  }
+
+  .item-prices-new {
+    font-size: 17px;
+  }
+
+  .item-price-old {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    width: 160px;
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .item img {
+    border-radius: 12px;
+  }
+
+  .item p {
+    margin: 8px 0 6px;
+    font-size: 14px;
+  }
+
+  .item-prices {
+    gap: 12px;
+  }
+
+  .item-prices-new {
+    font-size: 16px;
+  }
+
+  .item-price-old {
+    font-size: 13px;
+  }
+
+  .item:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.16);
+  }
+}
+
+@media (max-width: 360px) {
+  .item {
+    width: 140px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .item img {
+    border-radius: 10px;
+  }
+
+  .item p {
+    margin: 6px 0 6px;
+    font-size: 13px;
+  }
+
+  .item-prices {
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-prices-new {
+    font-size: 15px;
+  }
+
+  .item-price-old {
+    font-size: 12px;
+  }
+
+  .item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  }
+}

@@ -1,0 +1,147 @@
+.new-collections {
+  width: 100%;
+  padding: 90px 0 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(180deg, #ffffff, #f8f9ff);
+}
+
+.new-collections h1 {
+  font-size: 54px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.5px;
+}
+
+.new-collections hr {
+  width: 220px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff4141, #ff7a18);
+  border: none;
+  box-shadow: 0 6px 18px rgba(255, 65, 65, 0.45);
+}
+
+.collections {
+  width: 90%;
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 40px;
+}
+
+@media (max-width: 1200px) {
+  .collections {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px 35px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .new-collections {
+    padding: 70px 0 100px;
+  }
+
+  .new-collections h1 {
+    font-size: 48px;
+  }
+
+  .new-collections hr {
+    width: 200px;
+    height: 5px;
+  }
+
+  .collections {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .new-collections {
+    padding: 60px 0 80px;
+  }
+
+  .new-collections h1 {
+    font-size: 42px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .new-collections hr {
+    width: 180px;
+    height: 5px;
+  }
+
+  .collections {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px 30px;
+    margin-top: 50px;
+    width: 85%;
+  }
+}
+
+@media (max-width: 569.60px) {
+  .new-collections {
+    padding: 50px 0 70px;
+  }
+
+  .new-collections h1 {
+    font-size: 36px;
+  }
+
+  .new-collections hr {
+    width: 150px;
+    height: 4px;
+  }
+
+  .collections {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 20px;
+    margin-top: 40px;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .new-collections {
+    padding: 40px 0 60px;
+  }
+
+  .new-collections h1 {
+    font-size: 32px;
+  }
+
+  .new-collections hr {
+    width: 130px;
+  }
+
+  .collections {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    margin-top: 35px;
+    width: 85%;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 360px) {
+  .new-collections {
+    padding: 35px 0 50px;
+  }
+
+  .new-collections h1 {
+    font-size: 28px;
+  }
+
+  .new-collections hr {
+    width: 120px;
+  }
+
+  .collections {
+    gap: 35px;
+    width: 90%;
+    max-width: 300px;
+  }
+}
