@@ -8,58 +8,39 @@ const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const port = 4000;
-
 /* ================= MIDDLEWARE ================= */
 
 app.use(express.json());
 app.use(cors());
 
-/* ================= CREATE UPLOAD FOLDER ================= */
-
-if (!fs.existsSync("./upload/images")) {
-  fs.mkdirSync("./upload/images", { recursive: true });
-}
-
 /* ================= DATABASE CONNECTION ================= */
+const MONGO_URI =
+  process.env.MONGO_URI ||
+  "mongodb+srv://kaushalkr585_db_user:cNIC6cXEX4ButMK5@cluster0.lvrjh2f.mongodb.net/ecommerce";
 
 mongoose
-  .connect(
-    "mongodb+srv://kaushalkr585_db_user:cNIC6cXEX4ButMK5@cluster0.lvrjh2f.mongodb.net/ecommerce"
-  )
+  .connect(MONGO_URI)
   .then(() => console.log("MongoDB connected successfully"))
   .catch((error) => console.log("MongoDB connection error:", error));
 
 /* ================= TEST API ================= */
 
 app.get("/", (req, res) => {
-  res.send("Express App is Running");
+  res.send("Express App is Running on Vercel 🚀");
 });
 
-/* ================= IMAGE UPLOAD ================= */
+/* ================= IMAGE UPLOAD (⚠️ Vercel issue) ================= */
+/*
+  Vercel serverless environment me disk storage reliable nahi hota.
+  Isliye upload route temporary disable kar rahe hain.
+  Best solution: Cloudinary / S3 use karo.
+*/
 
-const storage = multer.diskStorage({
-  destination: "./upload/images",
-  filename: (req, file, cb) => {
-    cb(null, `product_${Date.now()}${path.extname(file.originalname)}`);
-  },
-});
-
-const upload = multer({ storage });
-
-app.use("/images", express.static("upload/images"));
-
-app.post("/upload", upload.single("product"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({
-      success: false,
-      message: "No file uploaded",
-    });
-  }
-
-  res.json({
-    success: true,
-    image_url: `http://localhost:${port}/images/${req.file.filename}`,
+app.post("/upload", (req, res) => {
+  res.status(400).json({
+    success: false,
+    message:
+      "File upload is not supported on Vercel using local storage. Use Cloudinary/S3.",
   });
 });
 
@@ -158,7 +139,7 @@ const fetchUser = async (req, res, next) => {
   }
 
   try {
-    const data = jwt.verify(token, "secret_ecom");
+    const data = jwt.verify(token, process.env.JWT_SECRET || "secret_ecom");
     req.user = data.user;
     next();
   } catch (error) {
@@ -217,10 +198,7 @@ app.post("/removefromcart", fetchUser, async (req, res) => {
       userData.cartData[itemId] = 0;
     }
 
-    userData.cartData[itemId] = Math.max(
-      userData.cartData[itemId] - 1,
-      0
-    );
+    userData.cartData[itemId] = Math.max(userData.cartData[itemId] - 1, 0);
 
     await Users.findOneAndUpdate(
       { _id: req.user.id },
@@ -272,7 +250,10 @@ app.post("/signup", async (req, res) => {
 
     await user.save();
 
-    const token = jwt.sign({ user: { id: user.id } }, "secret_ecom");
+    const token = jwt.sign(
+      { user: { id: user.id } },
+      process.env.JWT_SECRET || "secret_ecom"
+    );
 
     res.json({
       success: true,
@@ -299,10 +280,7 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    const passCompare = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
+    const passCompare = await bcrypt.compare(req.body.password, user.password);
 
     if (!passCompare) {
       return res.json({
@@ -311,7 +289,10 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ user: { id: user.id } }, "secret_ecom");
+    const token = jwt.sign(
+      { user: { id: user.id } },
+      process.env.JWT_SECRET || "secret_ecom"
+    );
 
     res.json({
       success: true,
@@ -325,8 +306,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-/* ================= SERVER ================= */
+/* ================= EXPORT APP (IMPORTANT FOR VERCEL) ================= */
 
-app.listen(port, () => {
-  console.log("Server Running on Port " + port);
-});
+module.exports = app;
