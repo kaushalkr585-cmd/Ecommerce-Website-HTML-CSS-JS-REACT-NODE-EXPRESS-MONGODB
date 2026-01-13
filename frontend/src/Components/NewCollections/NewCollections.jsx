@@ -3,13 +3,14 @@ import "./NewCollections.css";
 import Item from "../Items/Item";
 
 const NewCollections = () => {
-  const [new_collection, setNew_collection] = useState([]);
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/newcollection`)
-      .then((response) => response.json())
-      .then((data) => setNew_collection(data));
-  }, []);
+  const [new_collection,setNew_collection] = useState([]);
+
+useEffect(()=>{
+  fetch('http://localhost:4000/newcollection')
+  .then((response)=>response.json())
+  .then((data)=>setNew_collection(data));
+},[])
 
   return (
     <div className="new-collections">
