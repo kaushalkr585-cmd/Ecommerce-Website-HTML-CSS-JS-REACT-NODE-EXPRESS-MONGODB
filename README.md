@@ -4,6 +4,7 @@
 
 ![CLOTHSY](https://img.shields.io/badge/CLOTHSY-E--Commerce-blue)
 ![MERN Stack](https://img.shields.io/badge/Stack-MERN-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 **A modern, scalable e-commerce solution built with the MERN stack**
 
@@ -37,34 +38,34 @@ CLOTHSY is a comprehensive full-stack e-commerce platform designed for modern on
 <div align="center">
 
 #### Homepage & Hero Section
-![Homepage](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/homepage.png)
+![Homepage](https://github.com/your-username/CLOTHSY/blob/main/screenshots/Homepage.png)
 *Modern landing page with new collections showcase*
 
 #### Product Categories
-![Men's Collection](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/mens-category.png)
+![Men's Collection](https://github.com/your-username/CLOTHSY/blob/main/screenshots/mens-category.png)
 *Men's category with advanced filtering options*
 
-![Women's Collection](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/womens-category.png)
+![Women's Collection](https://github.com/your-username/CLOTHSY/blob/main/screenshots/womens-category.png)
 *Women's category with product grid layout*
 
 #### New Collections
-![New Collections](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/new-collections.png)
+![New Collections](https://github.com/your-username/CLOTHSY/blob/main/screenshots/new-collections.png)
 *Featured new arrivals section*
 
 #### User Authentication
-![Login Page](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/login.png)
+![Login Page](https://github.com/your-username/CLOTHSY/blob/main/screenshots/login.png)
 *Secure login interface with modern design*
 
 #### Shopping Cart
-![Shopping Cart](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/cart.png)
+![Shopping Cart](https://github.com/your-username/CLOTHSY/blob/main/screenshots/cart.png)
 *Interactive cart with quantity controls and promo code support*
 
 #### Admin Dashboard
-![Admin Panel](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/admin-panel.png)
+![Admin Panel](https://github.com/your-username/CLOTHSY/blob/main/screenshots/admin-panel.png)
 *Product management dashboard with full CRUD operations*
 
 #### Newsletter Section
-![Newsletter](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/blob/main/screenshots/newsletter.png)
+![Newsletter](https://github.com/your-username/CLOTHSY/blob/main/screenshots/newsletter.png)
 *Email subscription with gradient background*
 
 </div>
@@ -265,8 +266,8 @@ Ensure you have the following installed on your system:
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB.git
-cd Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB
+git clone https://github.com/your-username/CLOTHSY.git
+cd CLOTHSY
 ```
 
 #### 2. Backend Setup
@@ -285,8 +286,7 @@ touch .env
 npm start
 ```
 
-**Backend runs on**: `process.env.REACT_APP_API_URL
-`
+**Backend runs on**: `http://localhost:5000`
 
 #### 3. Frontend Setup
 
@@ -324,8 +324,7 @@ After starting all three services, verify they're running:
 
 | Service | URL | Status Check |
 |---------|-----|--------------|
-| Backend | process.env.REACT_APP_API_URL
- | Visit `/api/health` |
+| Backend | http://localhost:5000 | Visit `/api/health` |
 | Frontend | http://localhost:3000 | Open in browser |
 | Admin | http://localhost:5173 | Open in browser |
 
@@ -339,7 +338,7 @@ Create a `.env` file in the `backend/` directory:
 
 ```env
 # Server Configuration
-PORT=4000
+PORT=5000
 NODE_ENV=development
 
 # Database Configuration
@@ -365,8 +364,7 @@ ADMIN_URL=http://localhost:5173
 Create a `.env` file in the `frontend/` directory:
 
 ```env
-REACT_APP_API_URL=process.env.REACT_APP_API_URL
-/api
+REACT_APP_API_URL=http://localhost:5000/api
 REACT_APP_ENVIRONMENT=development
 ```
 
@@ -375,8 +373,7 @@ REACT_APP_ENVIRONMENT=development
 Create a `.env` file in the `admin/` directory:
 
 ```env
-VITE_API_URL=process.env.REACT_APP_API_URL
-/api
+VITE_API_URL=http://localhost:5000/api
 VITE_ENVIRONMENT=development
 ```
 
@@ -417,8 +414,7 @@ mongod
 ### Base URL
 
 ```
-process.env.REACT_APP_API_URL
-/api
+http://localhost:5000/api
 ```
 
 ### Authentication Endpoints
@@ -609,7 +605,7 @@ Error: connect ECONNREFUSED 127.0.0.1:27017
 
 #### Port Already in Use
 ```bash
-Error: listen EADDRINUSE: address already in use :::4000
+Error: listen EADDRINUSE: address already in use :::5000
 ```
 **Solution**: Change port in `.env` or kill process using the port
 
@@ -673,9 +669,13 @@ We welcome contributions from the community! Please follow these guidelines:
 ## Support
 
 For support, please:
-- Open an issue on GitHub: [Issues](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/issues)
-- Contact: kaushalkr585@gmail.com
+- Open an issue on GitHub
+- Contact: kushal@example.com
+- Check the [Wiki](https://github.com/your-username/CLOTHSY/wiki) for detailed guides
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
