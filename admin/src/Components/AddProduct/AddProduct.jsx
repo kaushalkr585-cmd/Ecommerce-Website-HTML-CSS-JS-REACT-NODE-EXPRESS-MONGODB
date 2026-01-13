@@ -3,6 +3,8 @@ import "./AddProduct.css";
 import upload_area from "../../assets/upload_area.svg";
 
 const AddProduct = () => {
+  const API_URL = "https://backend-pink-tau.vercel.app";
+
   const [image, setImage] = useState(null);
   const [product, setProduct] = useState({
     name: "",
@@ -27,12 +29,11 @@ const AddProduct = () => {
         return;
       }
 
-      
+      // Upload Image
       const formData = new FormData();
       formData.append("product", image);
 
-      const uploadResp = await fetch("process.env.REACT_APP_API_URL
-/upload", {
+      const uploadResp = await fetch(`${API_URL}/upload`, {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData,
@@ -45,15 +46,14 @@ const AddProduct = () => {
         return;
       }
 
-      
+      // Final product with uploaded image URL
       const finalProduct = {
         ...product,
         image: uploadData.image_url,
       };
 
-      
-      const addResp = await fetch("process.env.REACT_APP_API_URL
-/addproduct", {
+      // Add Product
+      const addResp = await fetch(`${API_URL}/addproduct`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -75,12 +75,29 @@ const AddProduct = () => {
     <div className="add-product">
       <div className="addproduct-itemfield">
         <p>Product title</p>
-        <input type="text" name="name" value={product.name} onChange={changeHandler} />
+        <input
+          type="text"
+          name="name"
+          value={product.name}
+          onChange={changeHandler}
+        />
       </div>
 
       <div className="addproduct-price">
-        <input type="text" name="old_price" placeholder="Price" value={product.old_price} onChange={changeHandler} />
-        <input type="text" name="new_price" placeholder="Offer Price" value={product.new_price} onChange={changeHandler} />
+        <input
+          type="text"
+          name="old_price"
+          placeholder="Price"
+          value={product.old_price}
+          onChange={changeHandler}
+        />
+        <input
+          type="text"
+          name="new_price"
+          placeholder="Offer Price"
+          value={product.new_price}
+          onChange={changeHandler}
+        />
       </div>
 
       <select name="category" value={product.category} onChange={changeHandler}>
@@ -90,7 +107,11 @@ const AddProduct = () => {
       </select>
 
       <label htmlFor="file-input">
-        <img src={image ? URL.createObjectURL(image) : upload_area} className="addproduct-thumbnail-img" alt="" />
+        <img
+          src={image ? URL.createObjectURL(image) : upload_area}
+          className="addproduct-thumbnail-img"
+          alt=""
+        />
       </label>
       <input id="file-input" type="file" hidden onChange={imageHandler} />
 

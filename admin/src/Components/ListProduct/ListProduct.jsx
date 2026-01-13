@@ -3,35 +3,43 @@ import "./ListProduct.css";
 import cross_icon from "../../assets/cross_icon.png";
 
 const ListProduct = () => {
+  const API_URL = "https://backend-pink-tau.vercel.app";
+
   const [allproducts, setAllproducts] = useState([]);
 
-  const fetchInfo = async () => {
-    try {
-      const res = await fetch("process.env.REACT_APP_API_URL
-/allproducts");
-      const data = await res.json();
-      setAllproducts(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const res = await fetch(`${API_URL}/allproducts`);
+        const data = await res.json();
+        setAllproducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
     fetchInfo();
   }, []);
 
-  const remove_product = async (id) =>{
-    await fetch('process.env.REACT_APP_API_URL
-/removeproduct',{
-        method:'POST',
-        headers:{
-            Accept:'application/json',
-            'Content-Type':'application/json',
+  const remove_product = async (id) => {
+    try {
+      await fetch(`${API_URL}/removeproduct`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify({id:id})
-    })
-    await fetchInfo();
-  }
+        body: JSON.stringify({ id: id }),
+      });
+
+      // Refresh list after removing
+      const res = await fetch(`${API_URL}/allproducts`);
+      const data = await res.json();
+      setAllproducts(data);
+    } catch (error) {
+      console.error("Error removing product:", error);
+    }
+  };
 
   return (
     <div className="list-product">
@@ -61,7 +69,8 @@ const ListProduct = () => {
               <p>${product.old_price}</p>
               <p>${product.new_price}</p>
               <p>{product.category}</p>
-              <img onClick={()=>{remove_product(product.id)}}
+              <img
+                onClick={() => remove_product(product.id)}
                 className="listproduct-remove-icon"
                 src={cross_icon}
                 alt="Remove"
