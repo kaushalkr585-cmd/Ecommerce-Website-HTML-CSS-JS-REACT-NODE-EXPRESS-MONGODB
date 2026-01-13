@@ -5,7 +5,6 @@
 ![CLOTHSY](https://img.shields.io/badge/CLOTHSY-E--Commerce-blue)
 ![MERN Stack](https://img.shields.io/badge/Stack-MERN-green)
 
-
 **A modern, scalable e-commerce solution built with the MERN stack**
 
 [Features](#features) • [Architecture](#architecture) • [Installation](#installation) • [Documentation](#documentation) • [Contributing](#contributing)
@@ -38,34 +37,34 @@ CLOTHSY is a comprehensive full-stack e-commerce platform designed for modern on
 <div align="center">
 
 #### Homepage & Hero Section
-![Homepage](https://github.com/your-username/CLOTHSY/blob/main/screenshots/homepage.png)
+![Homepage](screenshots/homepage.png)
 *Modern landing page with new collections showcase*
 
 #### Product Categories
-![Men's Collection](https://github.com/your-username/CLOTHSY/blob/main/screenshots/mens-category.png)
+![Men's Collection](screenshots/mens-category.png)
 *Men's category with advanced filtering options*
 
-![Women's Collection](https://github.com/your-username/CLOTHSY/blob/main/screenshots/womens-category.png)
+![Women's Collection](screenshots/womens-category.png)
 *Women's category with product grid layout*
 
 #### New Collections
-![New Collections](https://github.com/your-username/CLOTHSY/blob/main/screenshots/new-collections.png)
+![New Collections](screenshots/new-collections.png)
 *Featured new arrivals section*
 
 #### User Authentication
-![Login Page](https://github.com/your-username/CLOTHSY/blob/main/screenshots/login.png)
+![Login Page](screenshots/login.png)
 *Secure login interface with modern design*
 
 #### Shopping Cart
-![Shopping Cart](https://github.com/your-username/CLOTHSY/blob/main/screenshots/cart.png)
+![Shopping Cart](screenshots/cart.png)
 *Interactive cart with quantity controls and promo code support*
 
 #### Admin Dashboard
-![Admin Panel](https://github.com/your-username/CLOTHSY/blob/main/screenshots/admin-panel.png)
+![Admin Panel](screenshots/admin-panel.png)
 *Product management dashboard with full CRUD operations*
 
 #### Newsletter Section
-![Newsletter](https://github.com/your-username/CLOTHSY/blob/main/screenshots/newsletter.png)
+![Newsletter](screenshots/newsletter.png)
 *Email subscription with gradient background*
 
 </div>
@@ -266,8 +265,8 @@ Ensure you have the following installed on your system:
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/CLOTHSY.git
-cd CLOTHSY
+git clone https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB.git
+cd Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB
 ```
 
 #### 2. Backend Setup
@@ -669,8 +668,8 @@ We welcome contributions from the community! Please follow these guidelines:
 ## Support
 
 For support, please:
-- Open an issue on GitHub
-- Contact: kushal@example.com
+- Open an issue on GitHub: [Issues](https://github.com/kaushalkr585-cmd/Ecommerce-Website-HTML-CSS-JS-REACT-NODE-EXPRESS-MONGODB/issues)
+- Contact: kaushalkr585@gmail.com
 
 ## License
 
