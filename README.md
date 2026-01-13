@@ -285,7 +285,8 @@ touch .env
 npm start
 ```
 
-**Backend runs on**: `http://localhost:4000`
+**Backend runs on**: `process.env.REACT_APP_API_URL
+`
 
 #### 3. Frontend Setup
 
@@ -323,7 +324,8 @@ After starting all three services, verify they're running:
 
 | Service | URL | Status Check |
 |---------|-----|--------------|
-| Backend | http://localhost:4000 | Visit `/api/health` |
+| Backend | process.env.REACT_APP_API_URL
+ | Visit `/api/health` |
 | Frontend | http://localhost:3000 | Open in browser |
 | Admin | http://localhost:5173 | Open in browser |
 
@@ -363,7 +365,8 @@ ADMIN_URL=http://localhost:5173
 Create a `.env` file in the `frontend/` directory:
 
 ```env
-REACT_APP_API_URL=http://localhost:4000/api
+REACT_APP_API_URL=process.env.REACT_APP_API_URL
+/api
 REACT_APP_ENVIRONMENT=development
 ```
 
@@ -372,7 +375,8 @@ REACT_APP_ENVIRONMENT=development
 Create a `.env` file in the `admin/` directory:
 
 ```env
-VITE_API_URL=http://localhost:4000/api
+VITE_API_URL=process.env.REACT_APP_API_URL
+/api
 VITE_ENVIRONMENT=development
 ```
 
@@ -413,7 +417,8 @@ mongod
 ### Base URL
 
 ```
-http://localhost:4000/api
+process.env.REACT_APP_API_URL
+/api
 ```
 
 ### Authentication Endpoints

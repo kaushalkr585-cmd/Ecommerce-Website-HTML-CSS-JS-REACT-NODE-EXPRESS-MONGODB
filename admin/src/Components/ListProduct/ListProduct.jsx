@@ -7,7 +7,8 @@ const ListProduct = () => {
 
   const fetchInfo = async () => {
     try {
-      const res = await fetch("http://localhost:4000/allproducts");
+      const res = await fetch("process.env.REACT_APP_API_URL
+/allproducts");
       const data = await res.json();
       setAllproducts(data);
     } catch (error) {
@@ -20,7 +21,8 @@ const ListProduct = () => {
   }, []);
 
   const remove_product = async (id) =>{
-    await fetch('http://localhost:4000/removeproduct',{
+    await fetch('process.env.REACT_APP_API_URL
+/removeproduct',{
         method:'POST',
         headers:{
             Accept:'application/json',
