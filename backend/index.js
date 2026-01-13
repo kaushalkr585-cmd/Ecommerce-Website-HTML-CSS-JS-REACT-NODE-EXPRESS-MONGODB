@@ -4,31 +4,41 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 /* ================= MIDDLEWARE ================= */
 
 app.use(express.json());
 app.use(cors());
 
-/* ================= CREATE UPLOAD FOLDER ================= */
-
-if (!fs.existsSync("./upload/images")) {
-  fs.mkdirSync("./upload/images", { recursive: true });
-}
-
 /* ================= DATABASE CONNECTION ================= */
 
-mongoose
-  .connect(
-    "mongodb+srv://kaushalkr585_db_user:cNIC6cXEX4ButMK5@cluster0.lvrjh2f.mongodb.net/ecommerce"
-  )
-  .then(() => console.log("MongoDB connected successfully"))
-  .catch((error) => console.log("MongoDB connection error:", error));
+// Use connection pooling for serverless
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) {
+    return;
+  }
+
+  try {
+    await mongoose.connect(
+      "mongodb+srv://kaushalkr585_db_user:cNIC6cXEX4ButMK5@cluster0.lvrjh2f.mongodb.net/ecommerce",
+      {
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+      }
+    );
+    isConnected = true;
+    console.log("MongoDB connected successfully");
+  } catch (error) {
+    console.log("MongoDB connection error:", error);
+    throw error;
+  }
+};
 
 /* ================= TEST API ================= */
 
@@ -38,16 +48,12 @@ app.get("/", (req, res) => {
 
 /* ================= IMAGE UPLOAD ================= */
 
-const storage = multer.diskStorage({
-  destination: "./upload/images",
-  filename: (req, file, cb) => {
-    cb(null, `product_${Date.now()}${path.extname(file.originalname)}`);
-  },
+// Use memory storage for Vercel (filesystem is read-only)
+const storage = multer.memoryStorage();
+const upload = multer({ 
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
 });
-
-const upload = multer({ storage });
-
-app.use("/images", express.static("upload/images"));
 
 app.post("/upload", upload.single("product"), (req, res) => {
   if (!req.file) {
@@ -57,9 +63,12 @@ app.post("/upload", upload.single("product"), (req, res) => {
     });
   }
 
+  // For serverless, you'll need to use a cloud storage service (Cloudinary, AWS S3, etc.)
+  // This is a placeholder - file upload won't persist on Vercel without external storage
   res.json({
     success: true,
-    image_url: `http://localhost:${port}/images/${req.file.filename}`,
+    message: "File upload requires external storage service (Cloudinary/S3) on Vercel",
+    image_url: `placeholder_${Date.now()}${path.extname(req.file.originalname)}`,
   });
 });
 
@@ -90,6 +99,8 @@ const Users = mongoose.model("Users", {
 
 app.post("/addproduct", async (req, res) => {
   try {
+    await connectDB();
+    
     const lastProduct = await Product.findOne().sort({ id: -1 });
     const id = lastProduct ? lastProduct.id + 1 : 1;
 
@@ -119,32 +130,52 @@ app.post("/addproduct", async (req, res) => {
 /* ================= GET ALL PRODUCTS ================= */
 
 app.get("/allproducts", async (req, res) => {
-  const products = await Product.find({});
-  res.json(products);
+  try {
+    await connectDB();
+    const products = await Product.find({});
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /* ================= DELETE PRODUCT ================= */
 
 app.post("/removeproduct", async (req, res) => {
-  await Product.findOneAndDelete({ id: req.body.id });
-  res.json({
-    success: true,
-    message: "Product removed successfully",
-  });
+  try {
+    await connectDB();
+    await Product.findOneAndDelete({ id: req.body.id });
+    res.json({
+      success: true,
+      message: "Product removed successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /* ================= NEW COLLECTION ================= */
 
 app.get("/newcollection", async (req, res) => {
-  const products = await Product.find().sort({ date: -1 }).limit(8);
-  res.json(products);
+  try {
+    await connectDB();
+    const products = await Product.find().sort({ date: -1 }).limit(8);
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /* ================= POPULAR IN WOMEN ================= */
 
 app.get("/popularinwomen", async (req, res) => {
-  const products = await Product.find({ category: "women" });
-  res.json(products.slice(0, 4));
+  try {
+    await connectDB();
+    const products = await Product.find({ category: "women" });
+    res.json(products.slice(0, 4));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 /* ================= AUTH MIDDLEWARE ================= */
@@ -172,6 +203,7 @@ const fetchUser = async (req, res, next) => {
 
 app.post("/addtocart", fetchUser, async (req, res) => {
   try {
+    await connectDB();
     const { itemId } = req.body;
 
     const userData = await Users.findOne({ _id: req.user.id });
@@ -206,6 +238,7 @@ app.post("/addtocart", fetchUser, async (req, res) => {
 
 app.post("/removefromcart", fetchUser, async (req, res) => {
   try {
+    await connectDB();
     const { itemId } = req.body;
 
     const userData = await Users.findOne({ _id: req.user.id });
@@ -242,17 +275,23 @@ app.post("/removefromcart", fetchUser, async (req, res) => {
 /* ================= GET CART ================= */
 
 app.post("/getcart", fetchUser, async (req, res) => {
-  const userData = await Users.findOne({ _id: req.user.id });
-  if (!userData) {
-    return res.json({});
+  try {
+    await connectDB();
+    const userData = await Users.findOne({ _id: req.user.id });
+    if (!userData) {
+      return res.json({});
+    }
+    res.json(userData.cartData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-  res.json(userData.cartData);
 });
 
 /* ================= USER SIGNUP ================= */
 
 app.post("/signup", async (req, res) => {
   try {
+    await connectDB();
     const check = await Users.findOne({ email: req.body.email });
     if (check) {
       return res.status(400).json({
@@ -290,6 +329,7 @@ app.post("/signup", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
+    await connectDB();
     const user = await Users.findOne({ email: req.body.email });
 
     if (!user) {
@@ -327,6 +367,12 @@ app.post("/login", async (req, res) => {
 
 /* ================= SERVER ================= */
 
-app.listen(port, () => {
-  console.log("Server Running on Port " + port);
-});
+// Only start server in development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log("Server Running on Port " + port);
+  });
+}
+
+// Export for Vercel
+module.exports = app;
