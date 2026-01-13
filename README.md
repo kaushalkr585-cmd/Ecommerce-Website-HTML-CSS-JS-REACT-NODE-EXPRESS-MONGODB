@@ -4,7 +4,7 @@
 
 ![CLOTHSY](https://img.shields.io/badge/CLOTHSY-E--Commerce-blue)
 ![MERN Stack](https://img.shields.io/badge/Stack-MERN-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+
 
 **A modern, scalable e-commerce solution built with the MERN stack**
 
@@ -671,7 +671,6 @@ We welcome contributions from the community! Please follow these guidelines:
 For support, please:
 - Open an issue on GitHub
 - Contact: kushal@example.com
-- Check the [Wiki](https://github.com/your-username/CLOTHSY/wiki) for detailed guides
 
 ## License
 
