@@ -9,7 +9,8 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     const fetchProductsAndCart = async () => {
       try {
-        const productRes = await fetch("http://localhost:4000/allproducts");
+        const productRes = await fetch("import.meta.env.VITE_API_URL
+/allproducts");
         const products = await productRes.json();
 
         setAll_Product(products);
@@ -20,7 +21,8 @@ const ShopContextProvider = (props) => {
         });
 
         if (localStorage.getItem("auth-token")) {
-          const cartRes = await fetch("http://localhost:4000/getcart", {
+          const cartRes = await fetch("import.meta.env.VITE_API_URL
+/getcart", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -48,7 +50,8 @@ const ShopContextProvider = (props) => {
     }));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/addtocart", {
+      fetch("import.meta.env.VITE_API_URL
+/addtocart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +71,8 @@ const ShopContextProvider = (props) => {
     }));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/removefromcart", {
+      fetch("import.meta.env.VITE_API_URL
+/removefromcart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
