@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const multer = require("multer");
-const path = require("path");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
+// ✅ Cloudinary
+const { v2: cloudinary } = require("cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 const port = process.env.PORT || 4000;
 
@@ -20,9 +23,7 @@ app.use(cors());
 let isConnected = false;
 
 const connectDB = async () => {
-  if (isConnected) {
-    return;
-  }
+  if (isConnected) return;
 
   try {
     await mongoose.connect(
@@ -46,30 +47,47 @@ app.get("/", (req, res) => {
   res.send("Express App is Running");
 });
 
-/* ================= IMAGE UPLOAD ================= */
+/* ================= IMAGE UPLOAD (CLOUDINARY) ================= */
 
-// Use memory storage for Vercel (filesystem is read-only)
-const storage = multer.memoryStorage();
-const upload = multer({ 
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+// ✅ Cloudinary config (NO ENV - paste secret here)
+cloudinary.config({
+  cloud_name: "dleaqmeug",
+  api_key: "137898774758695",
+  api_secret: "zyGc_6OlQY02tznuyNYEX0376AE",
 });
 
-app.post("/upload", upload.single("product"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({
+// ✅ Store images on Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "clothsy-products",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+  },
+});
+
+const upload = multer({ storage });
+
+app.post("/upload", upload.single("product"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "No file uploaded",
+      });
+    }
+
+    return res.json({
+      success: true,
+      image_url: req.file.path, // Cloudinary image URL
+    });
+  } catch (error) {
+    console.log("Upload Error:", error);
+    return res.status(500).json({
       success: false,
-      message: "No file uploaded",
+      message: "Upload failed",
+      error: error.message,
     });
   }
-
-  // For serverless, you'll need to use a cloud storage service (Cloudinary, AWS S3, etc.)
-  // This is a placeholder - file upload won't persist on Vercel without external storage
-  res.json({
-    success: true,
-    message: "File upload requires external storage service (Cloudinary/S3) on Vercel",
-    image_url: `placeholder_${Date.now()}${path.extname(req.file.originalname)}`,
-  });
 });
 
 /* ================= PRODUCT SCHEMA ================= */
@@ -100,7 +118,7 @@ const Users = mongoose.model("Users", {
 app.post("/addproduct", async (req, res) => {
   try {
     await connectDB();
-    
+
     const lastProduct = await Product.findOne().sort({ id: -1 });
     const id = lastProduct ? lastProduct.id + 1 : 1;
 
@@ -250,10 +268,7 @@ app.post("/removefromcart", fetchUser, async (req, res) => {
       userData.cartData[itemId] = 0;
     }
 
-    userData.cartData[itemId] = Math.max(
-      userData.cartData[itemId] - 1,
-      0
-    );
+    userData.cartData[itemId] = Math.max(userData.cartData[itemId] - 1, 0);
 
     await Users.findOneAndUpdate(
       { _id: req.user.id },
@@ -339,10 +354,7 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    const passCompare = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
+    const passCompare = await bcrypt.compare(req.body.password, user.password);
 
     if (!passCompare) {
       return res.json({
@@ -368,7 +380,7 @@ app.post("/login", async (req, res) => {
 /* ================= SERVER ================= */
 
 // Only start server in development
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
     console.log("Server Running on Port " + port);
   });
