@@ -9,7 +9,7 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     const fetchProductsAndCart = async () => {
       try {
-        const productRes = await fetch("http://localhost:4000/allproducts");
+        const productRes = await fetch("https://backend-pink-tau.vercel.app/allproducts");
         const products = await productRes.json();
 
         setAll_Product(products);
@@ -20,7 +20,7 @@ const ShopContextProvider = (props) => {
         });
 
         if (localStorage.getItem("auth-token")) {
-          const cartRes = await fetch("http://localhost:4000/getcart", {
+          const cartRes = await fetch("https://backend-pink-tau.vercel.app/getcart", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const ShopContextProvider = (props) => {
     }));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/addtocart", {
+      fetch("https://backend-pink-tau.vercel.app/addtocart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const ShopContextProvider = (props) => {
     }));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:4000/removefromcart", {
+      fetch("https://backend-pink-tau.vercel.app/removefromcart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
