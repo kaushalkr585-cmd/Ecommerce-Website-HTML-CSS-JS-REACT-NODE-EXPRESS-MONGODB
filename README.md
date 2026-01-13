@@ -38,7 +38,7 @@ CLOTHSY is a comprehensive full-stack e-commerce platform designed for modern on
 <div align="center">
 
 #### Homepage & Hero Section
-![Homepage](https://github.com/your-username/CLOTHSY/blob/main/screenshots/Homepage.png)
+![Homepage](https://github.com/your-username/CLOTHSY/blob/main/screenshots/homepage.png)
 *Modern landing page with new collections showcase*
 
 #### Product Categories
