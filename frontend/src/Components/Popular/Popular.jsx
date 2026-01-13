@@ -3,14 +3,13 @@ import "./Popular.css";
 import Item from "../Items/Item";
 
 const Popular = () => {
+  const [popularProducts, setPopularProducts] = useState([]);
 
-  const [popularProducts,setPopularProducts] = useState([]);
-  useEffect(()=>{
-    fetch('import.meta.env.VITE_API_URL
-/popularinwomen')
-    .then((response)=>response.json())
-    .then((data)=>setPopularProducts(data));
-  },[])
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/popularinwomen`)
+      .then((response) => response.json())
+      .then((data) => setPopularProducts(data));
+  }, []);
 
   return (
     <div className="popular">

@@ -9,8 +9,9 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     const fetchProductsAndCart = async () => {
       try {
-        const productRes = await fetch("import.meta.env.VITE_API_URL
-/allproducts");
+        const productRes = await fetch(
+          `${import.meta.env.VITE_API_URL}/allproducts`
+        );
         const products = await productRes.json();
 
         setAll_Product(products);
@@ -21,14 +22,16 @@ const ShopContextProvider = (props) => {
         });
 
         if (localStorage.getItem("auth-token")) {
-          const cartRes = await fetch("import.meta.env.VITE_API_URL
-/getcart", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("auth-token"),
-            },
-          });
+          const cartRes = await fetch(
+            `${import.meta.env.VITE_API_URL}/getcart`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "auth-token": localStorage.getItem("auth-token"),
+              },
+            }
+          );
 
           const serverCart = await cartRes.json();
           setCartItems({ ...defaultCart, ...serverCart });
@@ -50,8 +53,7 @@ const ShopContextProvider = (props) => {
     }));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("import.meta.env.VITE_API_URL
-/addtocart", {
+      fetch(`${import.meta.env.VITE_API_URL}/addtocart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,8 +73,7 @@ const ShopContextProvider = (props) => {
     }));
 
     if (localStorage.getItem("auth-token")) {
-      fetch("import.meta.env.VITE_API_URL
-/removefromcart", {
+      fetch(`${import.meta.env.VITE_API_URL}/removefromcart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,9 +91,7 @@ const ShopContextProvider = (props) => {
 
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        const product = all_product.find(
-          (p) => p.id === Number(item)
-        );
+        const product = all_product.find((p) => p.id === Number(item));
         if (product) {
           total += product.new_price * cartItems[item];
         }

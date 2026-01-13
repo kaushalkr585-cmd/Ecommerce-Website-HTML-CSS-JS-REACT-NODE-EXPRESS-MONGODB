@@ -16,15 +16,17 @@ const LoginSignup = () => {
 
   const login = async () => {
     try {
-      const response = await fetch("import.meta.env.VITE_API_URL
-/login", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/login`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
@@ -42,15 +44,17 @@ const LoginSignup = () => {
 
   const signup = async () => {
     try {
-      const response = await fetch("import.meta.env.VITE_API_URL
-/signup", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/signup`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
@@ -99,9 +103,7 @@ const LoginSignup = () => {
           />
         </div>
 
-        <button onClick={state === "Login" ? login : signup}>
-          Continue
-        </button>
+        <button onClick={state === "Login" ? login : signup}>Continue</button>
 
         {state === "Sign Up" ? (
           <p className="loginsignup-login">
